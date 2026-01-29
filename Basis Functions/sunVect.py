@@ -10,7 +10,6 @@ from astropy import units as u
 import matplotlib.pyplot as plt
 import numpy as np
 
-#days=np.arange(200.0,311.0,1.0/(24.0*3600.0))
 days=np.arange(1.0,730.0,60.0/(24.0*3600.0))
 inPhase=np.zeros(len(days))
 outPhase=np.zeros(len(days))
@@ -20,7 +19,7 @@ labLong=-122.303400
 newYearTime=1704096000
 Seattle = EarthLocation(lat=labLat*u.deg,
                             lon=labLong*u.deg, height=56*u.m)
-theta_d = 0 # Composition dipole pointed in some direction
+theta_d = -23.0 # Composition dipole angle relative to North
 
 for dayNum in days:
 
@@ -39,14 +38,12 @@ for dayNum in days:
 	sunTheta=90.0-sunDec-labLat
 	sunPhi=sunAsc-labLong
 
-	#inPhase[index]=sunDec
-	#outPhase[index]=sunAsc
 	inPhase[index]=-np.cos(sunDec*np.pi/180)*np.sin((sunAsc+theta_d)*np.pi/180)
 	outPhase[index]= -np.cos(sunDec*np.pi/180)*np.cos((sunAsc+theta_d)*np.pi/180)
 	index+=1
 
 output=np.column_stack((days,inPhase,outPhase))
-np.savetxt('sunVectMin85-97.out',output)
+np.savetxt('sunVectMin.out',output)
 
 plt.plot(days,inPhase)
 plt.plot(days,outPhase)

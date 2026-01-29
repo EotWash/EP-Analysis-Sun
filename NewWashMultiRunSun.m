@@ -98,7 +98,7 @@ if (true)
     SunSampF = 1/(rawSun(2,1)-rawSun(1,1))/3600/24;
     timSun=decimate(rawSun(:,1),floor(SunSampF/sampF));
     inSun=(decimate(rawSun(:,2),floor(SunSampF/sampF)));
-    outSun=detrend(decimate(rawSun(:,3),floor(SunSampF/sampF)));
+    outSun=(decimate(rawSun(:,3),floor(SunSampF/sampF)));
 
     % Daylight savings correction
     timSun = timSun - (timSun>307.042)/24 - (timSun<69.082)/24 - (timSun<433.041)/24 - (timSun>671.041)/24;
